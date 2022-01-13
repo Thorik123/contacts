@@ -25,18 +25,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contatos'),
+        title: Text('Daftar Tersimpan'),
         backgroundColor: Colors.red,
         centerTitle: true,
         actions: <Widget>[
           PopupMenuButton<OrderOptions>(
             itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
               const PopupMenuItem<OrderOptions>(
-                child: Text('Ordenar de A-Z'),
+                child: Text('Urut dari A-Z'),
                 value: OrderOptions.orderaz,
               ),
               const PopupMenuItem<OrderOptions>(
-                child: Text('Ordenar de Z-A'),
+                child: Text('Urut dari Z-A'),
                 value: OrderOptions.orderza,
               ),
             ],
@@ -49,14 +49,13 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           _showContactPage();
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.person_add),
         backgroundColor: Colors.red,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(10.0),
-        itemCount: contacts.length,
-        itemBuilder: _contactCard
-      ),
+          padding: EdgeInsets.all(10.0),
+          itemCount: contacts.length,
+          itemBuilder: _contactCard),
     );
   }
 
@@ -74,8 +73,8 @@ class _HomePageState extends State<HomePage> {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: contacts[index].img != null
-                      ? FileImage(File(contacts[index].img))
-                      : AssetImage('assets/images/person.png'),
+                        ? FileImage(File(contacts[index].img))
+                        : AssetImage('assets/images/person.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -85,16 +84,13 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      contacts[index].name ?? '',
-                      style: TextStyle(
-                        fontSize: 22.0, fontWeight: FontWeight.bold)),
-                    Text(
-                      contacts[index].email ?? '',
-                      style: TextStyle(fontSize: 16.0)),
-                    Text(
-                      contacts[index].phone ?? '',
-                      style: TextStyle(fontSize: 18.0)),
+                    Text(contacts[index].name ?? '',
+                        style: TextStyle(
+                            fontSize: 22.0, fontWeight: FontWeight.bold)),
+                    Text(contacts[index].email ?? '',
+                        style: TextStyle(fontSize: 16.0)),
+                    Text(contacts[index].phone ?? '',
+                        style: TextStyle(fontSize: 18.0)),
                   ],
                 ),
               ),
@@ -124,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10.0),
                     child: TextButton(
                       child: Text(
-                        'Ligar',
+                        'Hubungkan',
                         style: TextStyle(color: Colors.red, fontSize: 20.0),
                       ),
                       onPressed: () {
@@ -137,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10.0),
                     child: TextButton(
                       child: Text(
-                        'Editar',
+                        'Edit',
                         style: TextStyle(color: Colors.red, fontSize: 20.0),
                       ),
                       onPressed: () {
@@ -150,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10.0),
                     child: TextButton(
                       child: Text(
-                        'Excluir',
+                        'Hapus',
                         style: TextStyle(color: Colors.red, fontSize: 20.0),
                       ),
                       onPressed: () {
@@ -172,9 +168,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showContactPage({Contact contact}) async {
-    final recContact = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ContactPage(contact: contact)));
+    final recContact = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ContactPage(contact: contact)));
     if (recContact != null) {
       if (contact != null) {
         await helper.updateContact(recContact);
